@@ -1,10 +1,10 @@
 package main
 
 import (
+	"github.com/gin-gonic/gin"
+
 	"github.com/rzksobhy27/go-server/controllers"
 	"github.com/rzksobhy27/go-server/inits"
-
-	"github.com/gin-gonic/gin"
 )
 
 func init() {
@@ -15,7 +15,10 @@ func init() {
 func main() {
 	r := gin.Default()
 
-	r.POST("/", controllers.UserRegister)
+	api := r.Group("/api")
 
-	r.Run()
+	api.POST("/login", controllers.UserLogin)
+	api.POST("/register", controllers.UserRegister)
+
+	r.Run(":6969")
 }

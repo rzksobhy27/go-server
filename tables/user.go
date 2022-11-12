@@ -1,9 +1,6 @@
 package tables
 
-import "gorm.io/gorm"
-
 type User struct {
-	gorm.Model
-	Name     string
-	Password string
+	Name     string `gorm:"primaryKey,unique,not null"`
+	Password string `gorm:"not null"`
 }
