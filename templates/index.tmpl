@@ -1,0 +1,57 @@
+{{ define "index.tmpl" }}
+<html>
+    <head>
+        <title>{{ .title }}</title>
+    </head>
+    <body>
+        <h1></h1>
+        <input type="text" placeholder="username" id="username" />
+        <input type="password" placeholder="password" id="password" />
+        <input type="button" value="login" onclick="login()" />
+        <input type="button" value="register" onclick="register()" />
+        <input type="button" value="logout" onclick="logout()" />
+        <script>
+            function getFields() {
+                const username = document.getElementById("username").value
+                const password = document.getElementById("password").value
+
+                return [username, password]
+            }
+
+            async function login() {
+                const [username, password] = getFields()
+
+                await fetch("/api/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        name: username,
+                        password
+                    })
+                })
+            }
+
+            async function register() {
+                const [username, password] = getFields()
+
+                await fetch("/api/register", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        name: username,
+                        password
+                    })
+                })               
+            }
+
+            function logout() {
+                console.log("logout")
+            }
+        </script>
+    </body>
+</html>
+{{ end }}

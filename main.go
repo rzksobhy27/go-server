@@ -14,11 +14,14 @@ func init() {
 
 func main() {
 	r := gin.Default()
+	r.LoadHTMLGlob("templates/*")
 
 	api := r.Group("/api")
 
 	api.POST("/login", controllers.UserLogin)
 	api.POST("/register", controllers.UserRegister)
+
+	r.GET("/", controllers.HomePage)
 
 	r.Run(":6969")
 }
